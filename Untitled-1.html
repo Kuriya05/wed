@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ระบบทะเบียนการศึกษา มหาวิทยาลัยแม่โจ้</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      background-color: #F3F4F6;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* Container */
+    .card {
+      width: 100%;
+      max-width: 24rem;
+      position: relative;
+    }
+
+    /* Decorative Strip */
+    .header-strip {
+      height: 10rem;
+      background-color: #F59E0B; /* amber-500 */
+      border-radius: 2rem;
+    }
+
+    /* Header Content */
+    .header-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem;
+      background-color: #047857; /* green-600 */
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+      border-bottom-left-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+      color: white;
+      text-align: center;
+    }
+
+    .header-logo {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 4.5rem;
+      /* adjust height automatically */
+    }
+
+    .header-text {
+      /* push down to clear the logo */
+      margin-top: 2.5rem;
+    }
+    .header-text h1 {
+      font-size: 1.125rem; /* text-md */
+      font-weight: bold;
+    }
+    .header-text h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 0.25rem;
+    }
+    .header-text h3 {
+      font-size: 1.25rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Responsive for larger screens */
+    @media (min-width: 768px) {
+      .header-strip {
+        height: 11rem;
+        border-radius: 2rem;
+      }
+      .header-content {
+        border-bottom-left-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+      }
+      .header-logo {
+        width: 6rem;
+      }
+      .header-text h1 {
+        font-size: 1.5rem;
+      }
+      .header-text h2 {
+        font-size: 1.875rem;
+      }
+      .header-text h3 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="header-strip"></div>
+    <div class="header-content">
+      <img class="header-logo" src="https://upload.wikimedia.org/wikipedia/th/b/b7/MJU_LOGO.svg" alt="Logo" />
+      <div class="header-text">
+        <h1>ระบบทะเบียนการศึกษา</h1>
+        <h2>มหาวิทยาลัยแม่โจ้</h2>
+        <h3>MAEJO UNIVERSITY</h3>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

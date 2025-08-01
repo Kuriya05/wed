@@ -52,3 +52,13 @@
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
+        csmjumage{
+            font-size: 1.2em;
+            color: #ff0000;
+            margin: 50px 0;
+        }
+
+        .csimage {
+            width: 200px;
+            height: 350px;
+        }
