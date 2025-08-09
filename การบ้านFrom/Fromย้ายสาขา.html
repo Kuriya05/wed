@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-sky-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white px-3 py-4 rounded-lg shadow-md  max-w-sm text-sm">
+        <form id="ticketForm">
+            <div class="mb-4 text-center">
+                <h1 class="lg:text-xl font-bold text-center text-red-500 ">คำร้องขอโอนย้ายสาขาวิชาต่างคณะ </h1>
+                <p class="text-red-500 text-s"> สำหรับหลักสูตร 4 ปี และหลักสูตร 4 ปีเทียบเข้าศึกษา (2ปี)</p>
+            </div>
+            <div>
+                <label for="date" class="text-black font-medium text-m mb-1">วันที่:</label>
+                <input type="date" name="date" required
+                    class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300" />
+            </div>
+            <div >
+                <label for="dean_name" class="text-black font-medium text-m mb-1">ชื่อคณะบดีคณะใหม่:</label>
+                <input type="text" name="dean_name" required minlength="5" maxlength="50" pattern="^[ก-๙a-zA-Z\s]+$"
+                    class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300" />
+            </div>
+            <div >
+                <label for="title" class="text-black font-medium text-m mb-1">คำนำหน้า:</label><br>
+                <select name="title"
+                    class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    <option value="นาย">นาย</option>
+                    <option value="นาง">นาง</option>
+                    <option value="นางสาว">นางสาว</option>
+                </select>
+            </div>
+            <div>
+                <label for="fullname" class="text-black font-medium text-m mb-1">ชื่อ-นามสกุล:</label><br>
+                <input type="text" name="fullname" required minlength="10" maxlength="20" pattern="^[ก-๙a-zA-Z\s]+$"
+                    class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300" />
+            </div>
+    <div >
+        <label for="student_id" class="text-black font-medium text-m mb-1">รหัสนักศึกษา:</label><br>
+        <input type="text" name="student_id" required minlength="10" maxlength="10" pattern="^[0-9]+$"
+            class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300" />
+    </div>
+    <div >
+        <label for="phone" class="text-black font-medium text-m mb-1">เบอร์โทรศัพท์:</label><br>
+        <input type="text" name="phone" required minlength="10" maxlength="10" pattern="^[0-9]+$"
+            class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300" />
+    </div>
+    <div>
+        <label for="program" class="text-black font-medium text-m mb-1">หลักสูตร:</label>
+        <select name="program"
+            class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300">
+            <option value="4ปี">4 ปี</option>
+            <option value="4ปีเทียบเข้าศึกษา(2ปี)">4 ปีเทียบเข้าศึกษา(2 ปี)</option>
+            <option value="ภาคปกติ">ภาคปกติ</option>
+            <option value="ภาคสมทบ">ภาคสมทบ</option>
+        </select>
+    </div>
+        <div >
+        <label for="old_major" class="text-black font-medium text-m mb-1">สาขาวิชาเดิม:</label>
+        <input type="text" name="old_major" required minlength="2" maxlength="100" pattern="^[ก-๙a-zA-Z\s]+$"
+            class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300" />
+        </div>
+        <div >
+        <label for="new_major" class="text-black font-medium text-m mb-1">สาขาวิชาที่ต้องการย้าย:</label>
+        <input type="text" name="new_major" required minlength="2" maxlength="100" pattern="^[ก-๙a-zA-Z\s]+$"
+            class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300" />
+    </div>
+    <div>
+        <label for="faculty" class="text-black font-medium text-m mb-1">คณะ:</label>
+        <input type="text" name="faculty" required minlength="2" maxlength="100" pattern="^[ก-๙a-zA-Z\s]+$"
+            class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300" />
+    </div>
+    <div>เหตุผลในการย้ายสาขา
+        <textarea name="reason" required minlength="10" maxlength="500"
+            class="w-full  px-2 py-1/2 border rounded focus:outline-none focus:ring focus:ring-blue-300"></textarea>
+    </div>
+    <div class="flex justify-center mt-4">
+        <input type="submit" value="ส่งคำร้อง"
+            class="w-1/2 px-1 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 cursor-pointer" />
+
+        </form>
+        <script>
+            document.getElementById('ticketForm').addEventListener('submit', function (event) {
+                event.preventDefault(); 
+
+                
+                alert('คำร้องขอโอนย้ายสาขาวิชาได้ถูกส่งเรียบร้อยแล้ว!');
+            });
+        </script>
+
+</body>
+
+</html>

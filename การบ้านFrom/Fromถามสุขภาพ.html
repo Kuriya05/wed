@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Survey</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-sky-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-md">
+    <h2 class="text-2xl text-sky-600 font-bold  text-center">Health Survey</h2>
+    <p class="text-lg text-gray-600 mb-4 text-center">กรุณากรอกแบบสำรวจสุขภาพของคุณ</p>
+    <form id="healthForm" class="space-y-4">
+      <div>
+        <label class="text-sky-600 text-xl">ชื่อ-นามสกุล:</label>
+        <input type="text" name="fullname" class="w-full border p-2 rounded" required />
+        <p class="text-sm text-red-500 hidden text-center" id="nameError">กรุณากรอกชื่อ-นามสกุล</p>
+      <!-- อายุ -->
+      <div>
+        <label class="text-sky-600 text-xl">อายุ (ปี):</label>
+        <input type="number" name="age" class="w-full border p-2 rounded" />
+        <p class="text-sm text-red-500 hidden text-center" id="ageError">กรุณากรอกอายุระหว่าง 15–60 ปี</p>
+      </div>
+
+      <!-- เพศ -->
+      <div>
+        <label class="text-sky-600 text-xl">เพศ:</label>
+        <div class="flex gap-4 mt-1 text-lg text-sky-800">
+          <label><input type="radio" name="gender" value="ชาย" /> ชาย</label>
+          <label><input type="radio" name="gender" value="หญิง" /> หญิง</label>
+        </div>
+        <p class="text-sm text-red-500 hidden text-center" id="genderError">กรุณาเลือกเพศ</p>
+      </div>
+
+      <!-- น้ำหนัก -->
+      <div>
+        <label class="text-sky-600 text-xl">น้ำหนัก (กิโลกรัม):</label>
+        <input type="number" name="weight" class="w-full border p-2 rounded" />
+        <p class="text-sm text-red-500 hidden text-center" id="weightError">น้ำหนักต้องเป็นค่ามากกว่า 0</p>
+      </div>
+
+      <!-- ส่วนสูง -->
+      <div>
+        <label class="text-sky-600 text-xl">ส่วนสูง (เซนติเมตร):</label>
+        <input type="number" name="height" class="w-full border p-2 rounded" />
+        <p class="text-sm text-red-500 hidden text-center" id="heightError">ส่วนสูงต้องเป็นค่ามากกว่า 0</p>
+      </div>
+
+      <!-- โรคประจำตัว -->
+      <div>
+        <label class="text-sky-600 text-xl">มีโรคประจำตัว:</label>
+        <input type="checkbox" id="hasDisease" />
+        <textarea id="diseaseDetails" placeholder="กรุณาระบุโรคประจำตัว" class="w-full border p-2 mt-2 rounded hidden"></textarea>
+        <p class="text-sm text-red-500 hidden text-center" id="diseaseError">กรุณากรอกรายละเอียดโรคประจำตัว</p>
+      </div>
+
+      <!-- ปุ่ม submit -->
+      <div class="text-center">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          ส่งแบบสอบถาม
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal -->
+  <div id="resultModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+    <div class="bg-white rounded-lg p-6 max-w-sm w-full text-center shadow-xl">
+      <h3 class="text-xl font-semibold mb-4">ผลการประเมิน</h3>
+      <p id="resultText" class="text-gray-700"></p>
+      <button onclick="closeModal()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        ปิด
+      </button>
+    </div>
+  </div>
+
+  <script >
+    
+    const form = document.getElementById('healthForm');
+    const modal = document.getElementById('resultModal');
+    const resultText = document.getElementById('resultText');
+
+    const diseaseCheckbox = document.getElementById('hasDisease');
+    const diseaseDetails = document.getElementById('diseaseDetails');
+
+    diseaseCheckbox.addEventListener('change', () => {
+      diseaseDetails.classList.toggle('hidden', !diseaseCheckbox.checked);
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get values
+      const age = parseInt(form.age.value);
+      const gender = form.gender.value;
+      const weight = parseFloat(form.weight.value);
+      const height = parseFloat(form.height.value);
+      const hasDisease = diseaseCheckbox.checked;
+      const diseaseText = diseaseDetails.value.trim();
+
+      // Reset errors
+      const showError = (id, show) => document.getElementById(id).classList.toggle('hidden', !show);
+      let isValid = true;
+
+      showError('ageError', !(age >= 15 && age <= 60)) || (isValid = age >= 15 && age <= 60);
+      showError('genderError', !gender) || (isValid = isValid && !!gender);
+      showError('weightError', !(weight > 0)) || (isValid = isValid && weight > 0);
+      showError('heightError', !(height > 0)) || (isValid = isValid && height > 0);
+      showError('diseaseError', hasDisease && diseaseText === '') || (isValid = isValid && (!hasDisease || diseaseText !== ''));
+
+      if (!isValid) return;
+
+      // Calculate BMI
+      const bmi = weight / Math.pow(height / 100, 2);
+      let category = '';
+      if (bmi < 18.5) category = 'น้ำหนักน้อย';
+      else if (bmi < 25) category = 'ปกติ';
+      else if (bmi < 30) category = 'น้ำหนักเกิน';
+      else category = 'อ้วน';
+
+      resultText.textContent = `ค่า BMI ของคุณคือ ${bmi.toFixed(2)} (${category})`;
+      modal.classList.remove('hidden');
+    });
+
+    function closeModal() {
+      modal.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
